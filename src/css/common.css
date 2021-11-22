@@ -47,14 +47,48 @@ body {
   margin: 30px;
 }
 
-input {
-  padding: 8px;
-  font: inherit;
-  background-color: #e9f2b0;
+button {
+  padding: 10px 15px;
+  margin: 20px;
+  cursor: pointer;
+  background-color: #aee8c7;
+  border-color: #5943d5;
+  border-width: 5px;
+  font-size: 30px;
 }
 
-button {
-  padding: 8px 12px;
-  cursor: pointer;
-  background-color: #bbf9d6;
+input {
+  padding: 10px;
+  font: inherit;
+  background-color: #e9f2b0;
+  border-color: #5943d5;
+  border-width: 5px;
+}
+
+.timer {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 180px;
+  background-color: #38723f;
+  border-radius: 20%;
+  border: 5px solid rgb(213, 205, 205);
+}
+
+.field:not(:last-child) {
+  margin-right: 30px;
+}
+
+.value {
+  font-size: 80px;
+  line-height: 1;
 }
