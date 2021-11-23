@@ -12,7 +12,7 @@ function changeBodyBgColor() {
 }
 
 function onStartBtnClick(e) {
-  changeBodyBgColor(); // ? Может b не нудно было тут функцию вызывать, но в видео примере Репеты, цвет фона меняется сразу же принажатии на кнопку
+  changeBodyBgColor();
   intervalId = setInterval(changeBodyBgColor, 1000);
   startBtn.disabled = true;
   stopBtn.disabled = false;
