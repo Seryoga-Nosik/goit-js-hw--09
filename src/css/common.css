@@ -92,3 +92,9 @@ input {
   font-size: 80px;
   line-height: 1;
 }
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

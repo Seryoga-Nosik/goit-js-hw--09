@@ -7,12 +7,12 @@ const refs = {
   input: document.querySelector('#datetime-picker'),
   startBtn: document.querySelector('[data-start]'),
   stopBtn: document.querySelector('[data-stop]'),
-  daysT: document.querySelector('[data-days]'),
-  hoursT: document.querySelector('[data-hours]'),
-  minutesT: document.querySelector('[data-minutes]'),
-  secondsT: document.querySelector('[data-seconds]'),
+  daysCont: document.querySelector('[data-days]'),
+  hoursCont: document.querySelector('[data-hours]'),
+  minutesCont: document.querySelector('[data-minutes]'),
+  secondsCont: document.querySelector('[data-seconds]'),
 };
-const { input, startBtn, stopBtn, daysT, hoursT, minutesT, secondsT } = refs;
+const { input, startBtn, stopBtn, daysCont, hoursCont, minutesCont, secondsCont } = refs;
 
 startBtn.disabled = true;
 stopBtn.disabled = true;
@@ -28,8 +28,8 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    console.log(selectedDates[0]);
     if (selectedDates[0] < options.defaultDate) {
+      startBtn.disabled = true;
       return Notify.failure('Please choose a date in the future');
     }
     startBtn.disabled = false;
@@ -42,12 +42,12 @@ function onStartClick() {
   intervalId = setInterval(() => {
     const currentTime = Date.now();
     const deltaTime = fp.selectedDates[0].getTime() - currentTime;
+    console.log('deltaTime', deltaTime);
     const time = convertMs(deltaTime);
     updateTimer(time);
-    const isFinished = Object.keys(time).every(el => time[el] === 0);
-    if (isFinished) {
+    if (deltaTime < 700) {
       finishTimer();
-      Notify.success('Timer finished');
+      Notify.success('Timer finished', { timeout: 10000 });
     }
   }, 1000);
   startBtn.disabled = true;
@@ -56,7 +56,7 @@ function onStartClick() {
 }
 
 function onStopBtnClick() {
-  Notify.warning('Timer stoped');
+  Notify.warning('Timer stoped', { timeout: 5000 });
   finishTimer();
 }
 
@@ -75,10 +75,10 @@ function convertMs(ms) {
 }
 
 function updateTimer({ days, hours, minutes, seconds }) {
-  daysT.textContent = addLeadingZero(days);
-  hoursT.textContent = addLeadingZero(hours);
-  minutesT.textContent = addLeadingZero(minutes);
-  secondsT.textContent = addLeadingZero(seconds);
+  daysCont.textContent = addLeadingZero(days);
+  hoursCont.textContent = addLeadingZero(hours);
+  minutesCont.textContent = addLeadingZero(minutes);
+  secondsCont.textContent = addLeadingZero(seconds);
 }
 
 function addLeadingZero(value) {
@@ -89,8 +89,8 @@ function finishTimer() {
   clearInterval(intervalId);
   stopBtn.disabled = true;
   input.disabled = false;
-  daysT.textContent = '00';
-  hoursT.textContent = '00';
-  minutesT.textContent = '00';
-  secondsT.textContent = '00';
+  daysCont.textContent = '00';
+  hoursCont.textContent = '00';
+  minutesCont.textContent = '00';
+  secondsCont.textContent = '00';
 }
